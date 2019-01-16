@@ -62,10 +62,10 @@ include "menu.php";
                     <small id="emailHelp" class="form-text text-muted text-center">Es la hora actual del sistema que guarda en BBDD</small>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                   <!-- <div class="col-md-4">
                     <label for="id" >ID día </label>
                     <?php 
-
+/*
                         echo "<div class='form-group'>";
 
                         $consulta = $mysqli->query("SELECT * FROM dia");
@@ -73,7 +73,7 @@ include "menu.php";
                     
                         if ($filas > 0) {
                             //cargamos el valor y lo enviamos a la url
-                            echo "<select id='idestacion' name='idestacion' class='form-control'>";
+                            echo "<select id='id' name='id' class='form-control'>";
                       
 
                             while ($row1 = $consulta->fetch_array()) {
@@ -87,7 +87,7 @@ include "menu.php";
                         }
 
                     
-                        echo "</div>";
+                        echo "</div>";*/
                     ?>
                     <small id="emailHelp" class="form-text text-muted text-center">Por ser clave foranea de la tabla sensor ha de existir.</small>
                     
@@ -96,50 +96,47 @@ include "menu.php";
                         
                         
                     </div>
+                    -->
                     <div class="col-md-4">
-                    
+                         <script>
+                            jQuery(document).ready(function($) {
+                               
+                                // Change es un evento que se ejecuta cada vez que se cambia el valor de un elemento (input, select, etc).
+                                $('#tipocultivo').change(function(e) {
+ 
+                                    $('#descripcion').html($('#tipocultivo option:selected').val());
+                                    
+                                });
+                            });
+                        </script>
                         <div class="form-group">
                             <label for="tipocultivo" >Tipo cultivo</label>
                             <div class='form-group'>
-                                <?php 
-
-                                // realizamos la consulta y almacenamos
-                                $consulta2 = $mysqli->query("SELECT tipo_cultivo FROM dia");
-                                $filas2 = mysqli_num_rows($consulta);
-                                // comprobamos si hay resultados
-                                if ($filas2 > 0) {
+                                <select id='tipocultivo' name='tipocultivo' class='form-control'>
                                 
-                                    echo "<select id='tipocultivo' name='tipocultivo' class='form-control'>";
-                                        while ($row2 = $consulta2->fetch_array()) {
-                                            echo "<option value='" . $row2["tipo_cultivo"] . "'>" . $row2["tipo_cultivo"] . "</option>" ;
-                                        }
-                                    echo "</select>";
-                                } else {
-                                    echo "<input type='text'  value=' no hay elementos' class='form-control' disabled=''>";
-                                }
-
-                                ?>
+                                            <option value='10'>germinacion</option>
+                                            <option value='18'>crecimiento</option>
+                                            <option value='12'>floracion</option>
+                                            <option value='12'>personalizado</option>
+                                </select>
                             </div>    
                         </div>
-                        <small id="fechaconfigsensor" class="form-text text-muted text-center">Por ser clave foranea de la tabla sensor ha de existir.</small>
+                        <small id="" class="form-text text-muted text-center">Va ha funcionar durante <strong><span id="descripcion"></span></strong> horas al día.</small>
                         
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="horaencendidoluz" >Hora encendido</label>
-                            <?php //Imprimimos los sensores que hay
-                            $consulta = "SELECT hora_encendido_luz FROM dia";
-                            $resultado = mysqli_query($mysqli, $consulta);
-                            echo "<select id='horaencendidoluz' name='horaencendidoluz'  class='form-control'>";
-                            while ($lista = mysqli_fetch_array($resultado)) {
-                                echo "<option>" . $lista["hora_encendido_luz"] . "</option>";
-                            }
-                            echo "</select>";
-                            ?>
-                            
-                            <small id="marcasensor" class="form-text text-muted text-center">Por ser clave foranea de la tabla sensor ha de existir.</small>
+                            <input type='time' id='horaencendidoluz' name='horaencendidoluz'  class='form-control' placeholder='17:30' />
+                            <small id="" class="form-text text-muted text-center">Hora que dará comienzo el clico de cultivo con sus características.</small>
                         </div>
-                       
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="diadecomienzo" >Día de comienzo</label>
+                            <input type='date' id='diadecomienzo' name='diadecomienzo'  class='form-control' placeholder='17:30' />
+                            <small id="" class="form-text text-muted text-center">Por ser clave foranea de la tabla sensor ha de existir.</small>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
